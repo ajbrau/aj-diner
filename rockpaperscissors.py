@@ -1,64 +1,66 @@
 import random
 
 moves = ['rock', 'paper', 'scissors', 'lizard', 'spock']
-computer = moves[random.randint(0,4)]
-comp_score = 0
-player_score = 0
-player = False
+player2 = None
+p2_score = 0
+p1_score = 0
+player1 = None
 print(moves)
-while player_score <= 4 and comp_score<= 4:
-  player = input('Please type your move:')
-  if player == computer:
+while p1_score < 4 and p2_score < 4:
+  player1 = input('PLAYER! please type your move: ')
+  player2 = input('PLAYER2 please type your move: ')
+  if player1 == player2:
     print("It's a tie!")
-  elif player == 'rock':
-    if computer == 'paper' or computer == 'spock':
+  elif player1 == 'rock':
+    if player2 == 'paper' or player2 == 'spock':
+      print('Player2 won!')
+      print(f'player1 played {player1} and player2 played {player2}')
+      p2_score += 1
+    elif player2 == 'lizard' or player2 == 'scissors':
+      print('Player1 won!')
+      print(f'player1 played {player1} and player2 played {player2}')
+      p1_score += 1
+  elif player1 == 'paper':
+    if player2 == 'scissors' or player2 == 'lizard':
+      print('Player2 won!')
+      print(f'player1 played {player1} and player2 played {player2}')
+      p2_score += 1
+    elif player2 == 'rock' or player2 == 'spock':
+      print('Player1 won!')
+      print(f'player1 played {player1} and player2 played {player2}')
+      p1_score += 1
+  elif player1 == 'scissors':
+    if player2 == 'rock' or player2 == 'spock':
       print('you lose!')
-      print(f'you played {player} and the computer played {computer}')
-      comp_score += 1
-    elif computer == 'lizard' or computer == 'scissors':
-      print('you win!')
-      print(f'you played {player} and the computer played {computer}')
-      player_score += 1
-  elif player == 'paper':
-    if computer == 'scissors' or computer == 'lizard':
-      print('you lose!')
-      print(f'you played {player} and the computer played {computer}')
-      comp_score += 1
-    elif computer == 'rock' or computer == 'spock':
-      print('you win!')
-      print(f'you played {player} and the computer played {computer}')
-      player_score += 1
-  elif player == 'scissors':
-    if computer == 'rock' or computer == 'spock':
-      print('you lose!')
-      print(f'you played {player} and the computer played {computer}')
-      comp_score += 1
-    elif computer == 'paper' or computer == 'lizard':
-      print('you win!')
-      print(f'you played {player} and the computer played {computer}')
-      player_score += 1
-  elif player == 'lizard':
-    if computer == 'scissors' or computer == 'rock':
-      print('you lose!')
-      print(f'you played {player} and the computer played {computer}')
-      comp_score += 1
-    elif computer == 'paper' or computer == 'spock':
-      print('you win!')
-      print(f'you played {player} and the computer played {computer}')
-      player_score += 1
-  elif player == 'spock':
-    if computer == 'paper' or computer == 'lizard':
-      print('you lose!')
-      print(f'you played {player} and the computer played {computer}')
-      comp_score += 1
-    elif computer == 'scissors' or computer == 'rock':
-      print('you win!')
-      print(f'you played {player} and the computer played {computer}')
+      print(f'player1 played {player1} and player2 played {player2}')
+      p2_score += 1
+    elif player2 == 'paper' or player2 == 'lizard':
+      print('Player1 won!')
+      print(f'player1 played {player1} and player2 played {player2}')
+      p1_score += 1
+  elif player1 == 'lizard':
+    if player2 == 'scissors' or player2 == 'rock':
+      print('Player2 won!')
+      print(f'player1 played {player1} and player2 played {player2}')
+      p2_score += 1
+    elif player2 == 'paper' or player2 == 'spock':
+      print('Player1 won!')
+      print(f'player1 played {player1} and player2 played {player2}')
+      p1_score += 1
+  elif player1 == 'spock':
+    if player2 == 'paper' or player2 == 'lizard':
+      print('Player2 won!')
+      print(f'player1 played {player} and player2 played {player2}')
+      p2_score += 1
+    elif player2 == 'scissors' or player2 == 'rock':
+      print('Player1 won!')
+      print(f'player1 played {player} and player2 played {player2}')
       player_score += 1
   else:
     print('invalid entry try again!')
+  print(f'player1: {p1_score} player2: {p2_score}')
 else:
-  if player_score > comp_score:
-    print('GAME OVER YOU WIN YAYYYYY!')
+  if p1_score > p2_score:
+    print('PLAYER 1 WINNNSSS!!!!!!')
   else:
-    print("YOU LOOOOOOOOOOOSSSEE!!! GAME. OVER.")
+    print("PLAYER 2 WINNNSSS!!!!!!")
