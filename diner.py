@@ -1,4 +1,7 @@
 from collections import namedtuple
+import random
+comments = ['nice!', 'sounds yum!', "That's my favorite thing here!"]
+comments2 = ['that side sounds delicious!', "I'm going to try that side soon"]
 
 EntreeMenuEntry = namedtuple('EntreeMenuEntry', ['index', 'name', 'price'])
 _menu = []
@@ -21,6 +24,7 @@ choice1 = int(input('Please choose an Entree Item by number: '))
 for item in _menu:
   if item.index == choice1:
     entree = item
+    print(random.choice(comments))
     print(f'you have selected "{item.name}" which will be ${item.price}')
     if item.name == 'steak':
       pref = int(input('How would you like your steak cooked? 1: rare 2: medium-rare 3: medium 4: well done. Enter number here: '))
@@ -48,10 +52,12 @@ choice2 = int(input('Please choose a side by number: '))
 for item in _sidemenu:
   if item.index == choice2:
     side = item
+    print(random.choice(comments2))
     print(f'you have selected "{item.name}" which will be ${item.price}')
 
 subtotal = entree.price + side.price
 print(f'Your total price before tax and tip will be: ${subtotal}')
 tip_percent = int(input('what tip percentage would you like? (ex: 10) enter here: '))
-total = round((subtotal*(tip_percent/100)) + (subtotal* 1.06), 2)
+conv_tip_percent = tip_percent/100
+total = round((subtotal*conv_tip_percent) + (subtotal* 1.06), 2)
 print(f'your total with your tip and tax will be ${total}')
