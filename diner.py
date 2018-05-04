@@ -53,6 +53,5 @@ for item in _sidemenu:
 subtotal = entree.price + side.price
 print(f'Your total price before tax and tip will be: ${subtotal}')
 tip_percent = int(input('what tip percentage would you like? (ex: 10) enter here: '))
-conv_tip_percent = tip_percent/100
-total = round((subtotal*conv_tip_percent) + (subtotal* 1.06), 2)
+total = round((subtotal*(tip_percent/100)) + (subtotal* 1.06), 2)
 print(f'your total with your tip and tax will be ${total}')
