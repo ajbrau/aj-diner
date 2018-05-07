@@ -32,7 +32,7 @@ print('2nd 12: 1/4 winnings if landed number is in the 2nd 12th')
 print('3rd 12: 1/4 winnings if landed number is in the 3rd 12th')
 print('number: JACKPOT! recieve all the money you have lost plus a thousand dollars more')
 print('                                      ')
-print('To quit type in "QUIT" instead of your bet')
+print('To cash out type in "QUIT" instead of your bet')
 print('                                      ')
 
 bets = ['even', 'odd', '1st 12', '2nd 12', '3rd 12']
@@ -43,8 +43,8 @@ bet = None
 while bet != 'QUIT':
   while wallet > 0:
     num = random.randint(1,37)
-    bet = input('Type your bet: ')
-    money = int(input('How much you going to risk? (in dollars): '))
+    money = int(input('How much would you like to bet? (in dollars): '))
+    bet = input("What would you like to bet on? ex:'odd': ")
     if isinstance(bet, int) == True:
       bet_int = int(bet)
       if bet_int == num:
@@ -55,6 +55,7 @@ while bet != 'QUIT':
       else:
         print('nope!')
         wallet -= money
+        losses += money
     else:
       if bet == 'even' and num % 2 == 0:
         print('both numbers are even!')
@@ -81,9 +82,13 @@ while bet != 'QUIT':
         rounds += 1
         winnings = money * 1/4
         wallet += winnings
+      elif bet == 'QUIT':
+        print(f'ok bye! your final wallet is: {wallet}')
+        break
       else:
         print('nope!')
         wallet -= money
+        losses += money
         rounds += 1
     print(f'wallet: {wallet}')
   else:
@@ -94,4 +99,3 @@ while bet != 'QUIT':
       print(f'nice! Now there is ${wallet} in your wallet')
     elif wallet_input == 0:
       print('ok see you later!')
-  
