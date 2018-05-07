@@ -92,10 +92,13 @@ while bet != 'QUIT':
         rounds += 1
     print(f'wallet: {wallet}')
   else:
-    print('you ran out of money! add more to play or enter 0 to stop playing')
+    print(f'you ran out of money! current wallet: ${wallet} add more to play or enter 0 to stop playing')
     wallet_input = int(input('Add more dollars: '))
     if wallet_input > 0:
       wallet += wallet_input
-      print(f'nice! Now there is ${wallet} in your wallet')
+      if wallet > 0:
+        print(f'nice! Now there is ${wallet} in your wallet')
+      else:
+          wallet_input = int(input('"whoops! you still need more to play. Enter more to keep playing: ))
     elif wallet_input == 0:
       print('ok see you later!')
