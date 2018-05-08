@@ -1,4 +1,5 @@
 import random
+import copy
 
 print('--------------------------------------')
 print('|34|31|28|25| |22|19|16|13| |10|7|4|1|')
@@ -24,6 +25,7 @@ print('3rd 12: 1/2 winnings if landed number is in the 3rd 12th')
 print('number: JACKPOT! recieve all the money you have lost plus a thousand dollars more')
 print('                                      ')
 print('To cash out type in "QUIT" instead of your bet')
+print('-Example: What would you like to bet on?: QUIT-')
 print('                                      ')
 
 bets = {'even', 'odd', '1st 12', '2nd 12', '3rd 12', 'QUIT'}
@@ -38,6 +40,7 @@ while True:
     continue
   else:
     break
+total_inputs = copy.copy(wallet)
 losses = 0.00
 rounds = 1
 cash = 0.00
@@ -45,6 +48,8 @@ bet = None
 winnings = 0
 wl = ''
 difference = 0
+y = True
+yes_or_no = {'yes', 'no'}
 #while user's input isn't 'QUIT' continue running through the game loop
 while bet != 'QUIT':
   #while there is money in the wallet, continue running through the game loop
@@ -54,11 +59,11 @@ while bet != 'QUIT':
     print(f'round: {rounds}')
     while True:
       try:
-         money = float(input('How much would you like to bet? (in dollars): '))
+         money = float(input('How much would you like to bet? (ex 10.50): '))
          money <= wallet
       except ValueError:
-         print("Not an integer! Try again.")
-         continue
+          print("Not an integer! Try again.")
+          continue
       if money < 0:
          print("whoops! that's a negative number. try again")
          continue
@@ -120,6 +125,10 @@ while bet != 'QUIT':
           wl = 'won'
         elif bet == 'QUIT':
           print(f'ok bye! your final wallet is: {round(wallet, 3)}')
+          if wallet > total_inputs:
+            print(f'your total net winnings are: ${round((wallet - total_inputs),2)}')
+          else:
+            print(f'your total net losses are: ${round((wallet - total_inputs),2)}')
           break
         else:
           wallet -= money
@@ -139,24 +148,24 @@ while bet != 'QUIT':
     print(f'total losses: ${round(losses, 3)}')
   else:
     print('You ran out of money! Add more to play or type 0 to stop playing.')
-    x = True
-    while x == True:
-      try:
-        wallet_input = int(input('Dollar amount: '))
-        wallet += wallet_input
-        print(f'sweet! now you have ${round(wallet, 3)} in your wallet. Lets keep playing!')
-        x == False
+    wallet_input = int(input('Dollar amount: '))
+    if wallet_input > 0:
+      wallet += wallet_input
+      total_inputs += wallet_input
+      print(f'sweet! now you have ${round(wallet, 3)} in your wallet. Lets keep playing!')
+      x = False
+      break
+    elif wallet_input == 0:
+      confirm = input('Do you really want to quit? type yes or no:')
+      if confirm == 'yes':
+        print(f'ok bye! your final wallet is: {round(wallet, 3)}')
+        if wallet > total_inputs:
+          print(f'your total net winnings are: ${round((wallet - total_inputs),2)}')
+        else:
+          print(f'your total net losses are: ${round((wallet - total_inputs),2)}')
         break
-      except ValueError:
-        print('must enter a number, try again: ')
-        continue
-      if wallet_input < 0:
-        print('whoops! enter a positive number')
-        continue
-      if wallet_input == 0:
-        print('ok bye! thanks for playing!')
+      elif confirm == 'no':
+        print('ok, lets keep playing!')
         break
-      else:
-        break
-    
-
+    else:
+      break
